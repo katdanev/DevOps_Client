@@ -1,5 +1,7 @@
 package com.keyin;
 
+import java.util.Objects;
+
 public class Aircraft {
 
     private int id;
@@ -7,9 +9,18 @@ public class Aircraft {
     private String airlineName;
     private int numberOfPassengers;
 
+    // Constructors
+    public Aircraft() {
+    }
+
+    public Aircraft(int id, String type, String airlineName, int numberOfPassengers) {
+        this.id = id;
+        this.type = type;
+        this.airlineName = airlineName;
+        this.numberOfPassengers = numberOfPassengers;
+    }
+
     // Getters and setters
-
-
     public int getId() {
         return id;
     }
@@ -41,4 +52,28 @@ public class Aircraft {
     public void setNumberOfPassengers(int numberOfPassengers) {
         this.numberOfPassengers = numberOfPassengers;
     }
+
+    @Override
+    public String toString() {
+        return "Aircraft{" +
+                "id=" + id +
+                ", type='" + type + '\'' +
+                ", airlineName='" + airlineName + '\'' +
+                ", numberOfPassengers=" + numberOfPassengers +
+                '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Aircraft aircraft = (Aircraft) o;
+        return id == aircraft.id && numberOfPassengers == aircraft.numberOfPassengers && Objects.equals(type, aircraft.type) && Objects.equals(airlineName, aircraft.airlineName);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, type, airlineName, numberOfPassengers);
+    }
 }
+
