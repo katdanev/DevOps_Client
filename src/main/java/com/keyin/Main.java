@@ -1,18 +1,12 @@
 package com.keyin;
 
-import com.keyin.AircraftService;
-import com.keyin.AirportService;
-import com.keyin.CityService;
-import com.keyin.PassengerService;
-
 import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
-        AircraftService aircraftService = new AircraftService();
-        AirportService airportService = new AirportService();
         CityService cityService = new CityService();
         PassengerService passengerService = new PassengerService();
+        AircraftService aircraftService = new AircraftService();
 
         Scanner scanner = new Scanner(System.in);
         while (true) {
@@ -28,27 +22,29 @@ public class Main {
 
             switch (option) {
                 case 1:
-                    System.out.print("Enter city name: ");
-                    String cityName = scanner.nextLine();
-                    //cityService.listAirportsInCity(cityName);
-                    cityService.listAirportsInCity(cityName);
-
+                    System.out.print("Enter city index: ");
+                    int cityIndex = scanner.nextInt();
+                    scanner.nextLine(); // consume newline
+                    cityService.listAirportsInCity(cityIndex);
                     break;
                 case 2:
                     System.out.print("Enter passenger ID: ");
                     int passengerId = scanner.nextInt();
+                    scanner.nextLine(); // consume newline
                     passengerService.listAircraftForPassenger(passengerId);
                     break;
                 case 3:
                     System.out.print("Enter aircraft ID: ");
                     int aircraftId = scanner.nextInt();
+                    scanner.nextLine();
                     aircraftService.listAirportsForAircraft(aircraftId);
                     break;
-//                case 4:
-//                    System.out.print("Enter passenger ID: ");
-//                    passengerId = scanner.nextInt();
-//                    passengerService.listAirportsForPassenger(passengerId);
-//                    break;
+                case 4:
+                    System.out.print("Enter passenger ID: ");
+                    passengerId = scanner.nextInt();
+                    scanner.nextLine();
+                    passengerService.listAirportsForPassenger(passengerId);
+                    break;
                 case 5:
                     System.out.println("Exiting...");
                     return;
