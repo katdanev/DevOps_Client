@@ -1,32 +1,33 @@
 package com.keyin;
 
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
-import java.util.Scanner;
 
 public class CityService {
-    public void listAirportsInCity(String cityName) {
+    public void listAirportsInCity(int cityIndex) {
         try {
-            URL url = new URL("http://localhost:8080/airports?city=" + cityName);
+            URL url = new URL("http://localhost:8080/city/" + cityIndex + "/airports");
+
             HttpURLConnection conn = (HttpURLConnection) url.openConnection();
             conn.setRequestMethod("GET");
-            conn.connect();
 
-            int responseCode = conn.getResponseCode();
-            if (responseCode != 200) {
-                throw new RuntimeException("HttpResponseCode: " + responseCode);
-            } else {
-                Scanner sc = new Scanner(url.openStream());
-                while (sc.hasNext()) {
-                    String inline = sc.nextLine();
-                    System.out.println(inline);
-                }
-                sc.close();
+            BufferedReader reader = new BufferedReader(new InputStreamReader(conn.getInputStream()));
+            String line;
+            StringBuffer response = new StringBuffer();
+
+            while ((line = reader.readLine()) != null) {
+                response.append(line);
             }
+            reader.close();
+
+            System.out.println("Airports in city with index " + cityIndex + ":");
+            System.out.println(response.toString());
+
+            conn.disconnect();
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
 }
-
-// Similar classes for AircraftService, AirportService, and PassengerService with appropriate methods.
