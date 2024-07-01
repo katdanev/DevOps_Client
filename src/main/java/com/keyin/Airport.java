@@ -1,5 +1,6 @@
 package com.keyin;
 
+import java.util.Objects;
 
 public class Airport {
     private int id;
@@ -7,9 +8,18 @@ public class Airport {
     private String code;
     private City city;
 
-    // Getters and setters
+    // Constructors
+    public Airport() {
+    }
 
+    public Airport(int id, String name, String code, City city) {
+        this.id = id;
+        this.name = name;
+        this.code = code;
+        this.city = city;
+    }
 
+    // Getters and Setters
     public int getId() {
         return id;
     }
@@ -40,5 +50,28 @@ public class Airport {
 
     public void setCity(City city) {
         this.city = city;
+    }
+
+    @Override
+    public String toString() {
+        return "Airport{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", code='" + code + '\'' +
+                ", city=" + city +
+                '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Airport airport = (Airport) o;
+        return id == airport.id && Objects.equals(name, airport.name) && Objects.equals(code, airport.code) && Objects.equals(city, airport.city);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, name, code, city);
     }
 }
