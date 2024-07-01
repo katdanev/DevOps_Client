@@ -11,10 +11,9 @@ import com.keyin.Airport;
 public class AirportService {
 
     public AirportService() {
-        // Конструктор
+
     }
 
-    // Метод для отримання інформації про аеропорт за його ідентифікатором
     public Airport getAirportById(int airportId) {
         try {
             URL url = new URL("http://localhost:8080/airports/" + airportId);
@@ -29,11 +28,8 @@ public class AirportService {
             }
             reader.close();
 
-            // Припустимо, що відповідь сервера містить JSON з інформацією про аеропорт
-            // Можна реалізувати парсинг JSON і створення об'єкта Airport
-
             Airport airport = new Airport();
-            // Заповнення даних про аеропорт (потрібно додати парсинг JSON)
+
 
             return airport;
         } catch (IOException e) {
@@ -42,7 +38,6 @@ public class AirportService {
         }
     }
 
-    // Метод для оновлення інформації про аеропорт
     public boolean updateAirport(Airport airport) {
         try {
             URL url = new URL("http://localhost:8080/airports/" + airport.getId());
@@ -51,9 +46,6 @@ public class AirportService {
             conn.setRequestProperty("Content-Type", "application/json");
             conn.setDoOutput(true);
 
-            // Перетворення об'єкта Airport в JSON і відправка на сервер
-
-            // Додатковий код для відправки даних на сервер
 
             int responseCode = conn.getResponseCode();
             return responseCode == HttpURLConnection.HTTP_OK;
@@ -63,5 +55,5 @@ public class AirportService {
         }
     }
 
-    // Інші методи можна реалізувати аналогічно для CRUD операцій з аеропортами
+
 }
